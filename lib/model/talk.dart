@@ -53,7 +53,9 @@ class Talk extends StatelessWidget {
       title: json['title'] != null ? json['title'] : "",
       track: json['track'] != null ? json['track'] : "",
       subtitle: json['subtitle'] != null ? json['subtitle'] : "",
-      abstract: json['abstract'] != null ? json['abstract'] : (json['description'] != null ? json['description'] : ""),
+      abstract: json['abstract'] != null
+          ? json['abstract']
+          : (json['description'] != null ? json['description'] : ""),
       start: json['start'] != null ? json['start'] : "",
       duration: json['duration'] != null ? json['duration'] : "",
       room: room,
@@ -88,7 +90,7 @@ class Talk extends StatelessWidget {
             child: ExcludeSemantics(
               child: Text(
                 title!,
-                style: TextStyle(
+                style: const TextStyle(
                   fontFamily: 'VcrOcdFaux',
                   fontWeight: FontWeight.bold,
                 ),
@@ -110,14 +112,14 @@ class Talk extends StatelessWidget {
                     content: favorite == true
                         ? Text(
                             '\"$title\" added to favorites.',
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontFamily: 'VcrOcdFaux',
                               fontWeight: FontWeight.bold,
                             ),
                           )
                         : Text(
                             '\"$title\" removed from favorites.',
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontFamily: 'VcrOcdFaux',
                               fontWeight: FontWeight.bold,
                             ),
@@ -127,14 +129,14 @@ class Talk extends StatelessWidget {
                       onPressed: () =>
                           favoriteProvider.favoriteTalk(this, day!),
                     ),
-                    duration: Duration(seconds: 2),
+                    duration: const Duration(seconds: 2),
                   ));
                 },
               ),
             ),
           ),
           trailing: Ink(
-            decoration: ShapeDecoration(
+            decoration: const ShapeDecoration(
               shape: CircleBorder(),
             ),
             child: IconButton(
@@ -149,7 +151,6 @@ class Talk extends StatelessWidget {
                   builder: (context) => SimpleDialog(
                     backgroundColor: FahrplanColors.base_black(),
                     shape: ContinuousRectangleBorder(
-
                       borderRadius: BorderRadius.circular(0.0),
                       side: BorderSide(
                         width: 2.0,
@@ -183,7 +184,7 @@ class Talk extends StatelessWidget {
                             label: 'Share $title',
                             child: ExcludeSemantics(
                               child: IconButton(
-                                icon: Icon(
+                                icon: const Icon(
                                   Icons.share,
                                 ),
                                 color:
@@ -225,7 +226,7 @@ class Talk extends StatelessWidget {
       child: ExcludeSemantics(
         child: Text(
           textString,
-          style: TextStyle(
+          style: const TextStyle(
             fontFamily: 'VcrOcdFaux',
           ),
         ),
@@ -242,10 +243,11 @@ class Talk extends StatelessWidget {
         Semantics(
           label: 'Subtitle $subtitle',
           child: Container(
-            padding: EdgeInsets.fromLTRB(0, 5, 0, 5),
+            padding: const EdgeInsets.fromLTRB(0, 5, 0, 5),
             child: Text(
               '$subtitle',
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16.0),
+              style:
+                  const TextStyle(fontWeight: FontWeight.bold, fontSize: 16.0),
             ),
           ),
         ),
@@ -261,11 +263,11 @@ class Talk extends StatelessWidget {
             child: Row(
               children: <Widget>[
                 Container(
+                  padding: const EdgeInsets.fromLTRB(0, 0, 10, 0),
                   child: Icon(
                     Icons.access_time,
                     color: FahrplanColors.primary_accent_light_red(),
                   ),
-                  padding: EdgeInsets.fromLTRB(0, 0, 10, 0),
                 ),
                 Text(
                   '$start',
@@ -286,11 +288,11 @@ class Talk extends StatelessWidget {
             child: Row(
               children: <Widget>[
                 Container(
+                  padding: const EdgeInsets.fromLTRB(0, 0, 10, 0),
                   child: Icon(
                     Icons.hourglass_empty,
                     color: FahrplanColors.primary_accent_light_red(),
                   ),
-                  padding: EdgeInsets.fromLTRB(0, 0, 10, 0),
                 ),
                 Text(
                   '$duration',
@@ -311,11 +313,11 @@ class Talk extends StatelessWidget {
             child: Row(
               children: <Widget>[
                 Container(
+                  padding: const EdgeInsets.fromLTRB(0, 0, 10, 0),
                   child: Icon(
                     Icons.room,
                     color: FahrplanColors.primary_accent_light_red(),
                   ),
-                  padding: EdgeInsets.fromLTRB(0, 0, 10, 0),
                 ),
                 Text(
                   '$room',
@@ -336,11 +338,11 @@ class Talk extends StatelessWidget {
             child: Row(
               children: <Widget>[
                 Container(
+                  padding: const EdgeInsets.fromLTRB(0, 0, 10, 0),
                   child: Icon(
                     Icons.school,
                     color: FahrplanColors.primary_accent_light_red(),
                   ),
-                  padding: EdgeInsets.fromLTRB(0, 0, 10, 0),
                 ),
                 Text(
                   '$track',
@@ -361,11 +363,11 @@ class Talk extends StatelessWidget {
             child: Row(
               children: <Widget>[
                 Container(
+                  padding: const EdgeInsets.fromLTRB(0, 0, 10, 0),
                   child: Icon(
                     Icons.translate,
                     color: FahrplanColors.primary_accent_light_red(),
                   ),
-                  padding: EdgeInsets.fromLTRB(0, 0, 10, 0),
                 ),
                 Text(
                   '$language',
@@ -386,15 +388,15 @@ class Talk extends StatelessWidget {
             child: Row(
               children: <Widget>[
                 Container(
+                  padding: const EdgeInsets.fromLTRB(0, 0, 10, 0),
                   child: Icon(
                     Icons.open_in_browser,
                     color: FahrplanColors.primary_accent_light_red(),
                   ),
-                  padding: EdgeInsets.fromLTRB(0, 0, 10, 0),
                 ),
                 Expanded(
                   child: Linkify(
-                    linkStyle: TextStyle(
+                    linkStyle: const TextStyle(
                       color: FahrplanColors.base_white(),
                     ),
                     onOpen: (link) async {
@@ -419,11 +421,11 @@ class Talk extends StatelessWidget {
             child: Row(
               children: <Widget>[
                 Container(
+                  padding: const EdgeInsets.fromLTRB(0, 0, 10, 0),
                   child: Icon(
                     Icons.group,
                     color: FahrplanColors.primary_accent_light_red(),
                   ),
-                  padding: EdgeInsets.fromLTRB(0, 0, 10, 0),
                 ),
                 Text(p.publicName!.length > 20
                     ? '${p.publicName!.substring(0, 19)}...'
@@ -442,11 +444,11 @@ class Talk extends StatelessWidget {
           label: 'Abstract $abstract',
           child: ExcludeSemantics(
             child: SingleChildScrollView(
-              padding: EdgeInsets.fromLTRB(0, 10, 0, 0),
+              padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  Text(
+                  const Text(
                     'Abstract: ',
                     style: TextStyle(fontWeight: FontWeight.bold),
                   ),
