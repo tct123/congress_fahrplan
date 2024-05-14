@@ -19,7 +19,7 @@ import 'package:http/http.dart' as http;
 
 class FahrplanFetcher {
   static String minimalFahrplanUrl =
-  'https://fahrplan.events.ccc.de/congress/2023/fahrplan/schedule.json';
+      'https://fahrplan.events.ccc.de/congress/2023/fahrplan/schedule.json';
 
   static bool multipleSchedules = false;
 
