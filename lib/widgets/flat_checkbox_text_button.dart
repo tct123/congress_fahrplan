@@ -30,7 +30,8 @@ class FlatCheckBoxTextButton extends StatelessWidget {
                   child: Checkbox(
                     value: value,
                     onChanged: null,
-                    checkColor: Theme.of(context).toggleableActiveColor,
+                    checkColor: Theme.of(context)
+                        .toggleableActiveColor, //toggleableActiveColor
                   ),
                 ),
                 Container(
