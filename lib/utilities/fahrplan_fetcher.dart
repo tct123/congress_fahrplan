@@ -97,7 +97,9 @@ class FahrplanFetcher {
             },
           )
           .timeout(const Duration(seconds: 20))
-          .catchError((e) {});
+          .catchError((e) {
+            return e;
+          });
 
       ///If the HTTP Status code is 200 OK use the Fahrplan from the response,
       ///Else if the HTTP Status Code is 304 Not Modified use the local file.
