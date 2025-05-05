@@ -105,7 +105,8 @@ class Talk extends StatelessWidget {
                 icon: Icon(
                   favorite! ? Icons.favorite : Icons.favorite_border,
                 ),
-                color: FahrplanColors.primary_accent_light_blue(),
+                color: FahrplanColors
+                    .primaryAccentLightBlue(), //primary_accent_light_blue
                 onPressed: () {
                   favoriteProvider.favoriteTalk(this, day!);
                   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
@@ -143,18 +144,19 @@ class Talk extends StatelessWidget {
               tooltip: "Show talk $title details.",
               icon: Icon(
                 Icons.info,
-                color: FahrplanColors.base_white(),
+                color: FahrplanColors.baseWhite(), //base_white
               ),
               onPressed: () {
                 showDialog(
                   context: context,
                   builder: (context) => SimpleDialog(
-                    backgroundColor: FahrplanColors.base_black(),
+                    backgroundColor: FahrplanColors.baseBlack(),
                     shape: ContinuousRectangleBorder(
                       borderRadius: BorderRadius.circular(0.0),
                       side: BorderSide(
                         width: 2.0,
-                        color: FahrplanColors.primary_accent_dark_red(),
+                        color: FahrplanColors
+                            .primaryAccentDarkRed(), //primary_accent_dark_red
                       ),
                     ),
                     contentPadding: const EdgeInsets.all(10),
@@ -172,7 +174,8 @@ class Talk extends StatelessWidget {
                             label: 'Copy abstract.',
                             child: IconButton(
                               icon: const Icon(Icons.content_copy),
-                              color: FahrplanColors.primary_accent_light_red(),
+                              color: FahrplanColors
+                                  .primaryAccentLightRed(), //primaryAccentLightRed
                               tooltip: 'Copy abstract.',
                               onPressed: () {
                                 Clipboard.setData(
@@ -187,8 +190,7 @@ class Talk extends StatelessWidget {
                                 icon: const Icon(
                                   Icons.share,
                                 ),
-                                color:
-                                    FahrplanColors.primary_accent_light_red(),
+                                color: FahrplanColors.primaryAccentLightRed(),
                                 tooltip: 'Share talk.',
                                 onPressed: () =>
                                     Share.share('Check out this talk: $url'),
@@ -264,7 +266,7 @@ class Talk extends StatelessWidget {
                   padding: const EdgeInsets.fromLTRB(0, 0, 10, 0),
                   child: Icon(
                     Icons.access_time,
-                    color: FahrplanColors.primary_accent_light_red(),
+                    color: FahrplanColors.primaryAccentLightRed(),
                   ),
                 ),
                 Text(
@@ -289,7 +291,7 @@ class Talk extends StatelessWidget {
                   padding: const EdgeInsets.fromLTRB(0, 0, 10, 0),
                   child: Icon(
                     Icons.hourglass_empty,
-                    color: FahrplanColors.primary_accent_light_red(),
+                    color: FahrplanColors.primaryAccentLightRed(),
                   ),
                 ),
                 Text(
@@ -314,7 +316,7 @@ class Talk extends StatelessWidget {
                   padding: const EdgeInsets.fromLTRB(0, 0, 10, 0),
                   child: Icon(
                     Icons.room,
-                    color: FahrplanColors.primary_accent_light_red(),
+                    color: FahrplanColors.primaryAccentLightRed(),
                   ),
                 ),
                 Text(
@@ -339,7 +341,7 @@ class Talk extends StatelessWidget {
                   padding: const EdgeInsets.fromLTRB(0, 0, 10, 0),
                   child: Icon(
                     Icons.school,
-                    color: FahrplanColors.primary_accent_light_red(),
+                    color: FahrplanColors.primaryAccentLightRed(),
                   ),
                 ),
                 Text(
@@ -364,7 +366,7 @@ class Talk extends StatelessWidget {
                   padding: const EdgeInsets.fromLTRB(0, 0, 10, 0),
                   child: Icon(
                     Icons.translate,
-                    color: FahrplanColors.primary_accent_light_red(),
+                    color: FahrplanColors.primaryAccentLightRed(),
                   ),
                 ),
                 Text(
@@ -389,13 +391,13 @@ class Talk extends StatelessWidget {
                   padding: const EdgeInsets.fromLTRB(0, 0, 10, 0),
                   child: Icon(
                     Icons.open_in_browser,
-                    color: FahrplanColors.primary_accent_light_red(),
+                    color: FahrplanColors.primaryAccentLightRed(),
                   ),
                 ),
                 Expanded(
                   child: Linkify(
-                    linkStyle: const TextStyle(
-                      color: FahrplanColors.base_white(),
+                    linkStyle: TextStyle(
+                      color: FahrplanColors.baseWhite(),
                     ),
                     onOpen: (link) async {
                       launchUrlInternal(link.url);
@@ -422,7 +424,7 @@ class Talk extends StatelessWidget {
                   padding: const EdgeInsets.fromLTRB(0, 0, 10, 0),
                   child: Icon(
                     Icons.group,
-                    color: FahrplanColors.primary_accent_light_red(),
+                    color: FahrplanColors.primaryAccentLightRed(),
                   ),
                 ),
                 Text(p.publicName!.length > 20

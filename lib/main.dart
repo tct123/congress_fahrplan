@@ -16,75 +16,75 @@ void main() {
 }
 
 class FahrplanColors {
-  static Color base_black() {
+  static Color baseBlack() {
     return const Color(0xff000000);
   }
 
-  static Color base_white() {
+  static Color baseWhite() {
     return const Color(0xffffffff);
   }
 
-  static Color base_grey_light() {
+  static Color baseGreyLight() {
     return const Color(0xffd9d9d9);
   }
 
-  static Color base_grey_medium() {
+  static Color baseGreyMedium() {
     return const Color(0xffaaaaaa);
   }
 
-  static Color base_medium_dark_grey() {
+  static Color baseMediumDarkGrey() {
     return const Color(0xff7a7a7a);
   }
 
-  static Color base_dark_grey() {
+  static Color baseDarkGrey() {
     return const Color(0xff202020);
   }
 
-  static Color primary_accent_light_blue() {
+  static Color primaryAccentLightBlue() {
     return const Color(0xff2d42ff);
   }
 
-  static Color primary_accent_dark_blue() {
+  static Color primaryAccentDarkBlue() {
     return const Color(0xff0b1575);
   }
 
-  static Color primary_accent_light_red() {
+  static Color primaryAccentLightRed() {
     return const Color(0xffde4040);
   }
 
-  static Color primary_accent_dark_red() {
+  static Color primaryAccentDarkRed() {
     return const Color(0xff561010);
   }
 
-  static Color primary_accent_light_green() {
+  static Color primaryAccentLightGreen() {
     return const Color(0xff79ff5e);
   }
 
-  static Color primary_accent_dark_green() {
+  static Color primaryAccentDarkGreen() {
     return const Color(0xff2b8d18);
   }
 
-  static Color secondary_accent_light_turquoise() {
+  static Color secondaryAccentLightTurquoise() {
     return const Color(0xff29ffff);
   }
 
-  static Color secondary_accent_dark_turquoise() {
+  static Color secondaryAccentDarkTurquoise() {
     return const Color(0xff006b6b);
   }
 
-  static Color secondary_accent_light_purple() {
+  static Color secondaryAccentLightPurple() {
     return const Color(0xffde37ff);
   }
 
-  static Color secondary_accent_dark_purple() {
+  static Color secondaryAccentDarkPurple() {
     return const Color(0xff66007a);
   }
 
-  static Color secondary_accent_light_yellow() {
+  static Color secondaryAccentLightYellow() {
     return const Color(0xfff6f675);
   }
 
-  static Color secondary_accent_dark_yellow() {
+  static Color secondaryAccentDarkYellow() {
     return const Color(0xff757501);
   }
 }
@@ -100,77 +100,76 @@ class ThemeWrapper extends StatelessWidget {
         fontFamily: 'VcrOcdFaux',
         brightness: Brightness.dark,
         colorScheme: ColorScheme.dark(
-          surface: FahrplanColors.base_black(),
+          surface: FahrplanColors.baseBlack(),
           brightness: Brightness.dark,
-          primary: FahrplanColors.base_white(),
+          primary: FahrplanColors.baseWhite(),
         ),
         tabBarTheme: const TabBarTheme(
           indicator: UnderlineTabIndicator(),
         ),
-        primaryColor: FahrplanColors.base_white(),
-        primaryColorLight: FahrplanColors.base_white(),
-        primaryColorDark: FahrplanColors.base_black(),
-        indicatorColor: FahrplanColors.primary_accent_light_blue(),
+        primaryColor: FahrplanColors.baseWhite(),
+        primaryColorLight: FahrplanColors.baseWhite(),
+        primaryColorDark: FahrplanColors.baseBlack(),
+        indicatorColor: FahrplanColors.primaryAccentLightBlue(),
         textTheme: TextTheme(
           titleLarge: TextStyle(
-            color: FahrplanColors.base_white(),
+            color: FahrplanColors.baseWhite(),
           ),
           bodyMedium: TextStyle(
-            color: FahrplanColors.base_white(),
+            color: FahrplanColors.baseWhite(),
           ),
           bodyLarge: TextStyle(
-            color: FahrplanColors.base_white(),
+            color: FahrplanColors.baseWhite(),
           ),
           titleSmall: TextStyle(
-            color: FahrplanColors.base_white(),
+            color: FahrplanColors.baseWhite(),
           ),
           titleMedium: TextStyle(
-            color: FahrplanColors.base_white(),
+            color: FahrplanColors.baseWhite(),
           ),
           headlineMedium: TextStyle(
-            color: FahrplanColors.base_white(),
+            color: FahrplanColors.baseWhite(),
           ),
           bodySmall: TextStyle(
-            color: FahrplanColors.base_white(),
+            color: FahrplanColors.baseWhite(),
           ),
           labelSmall: TextStyle(
-            color: FahrplanColors.base_white(),
+            color: FahrplanColors.baseWhite(),
           ),
           headlineSmall: TextStyle(
-            color: FahrplanColors.base_white(),
+            color: FahrplanColors.baseWhite(),
           ),
         ),
         cardTheme: CardTheme(
-          color: FahrplanColors.base_black(),
+          color: FahrplanColors.baseBlack(),
           shape: ContinuousRectangleBorder(
             borderRadius: BorderRadius.circular(0.0),
             side: BorderSide(
               width: 2.0,
-              color: FahrplanColors.primary_accent_dark_blue(),
+              color: FahrplanColors.primaryAccentDarkBlue(),
             ),
           ),
         ),
         snackBarTheme: SnackBarThemeData(
-          backgroundColor: FahrplanColors.base_black(),
-          actionTextColor: FahrplanColors.primary_accent_light_green(),
+          backgroundColor: FahrplanColors.baseBlack(),
+          actionTextColor: FahrplanColors.primaryAccentLightGreen(),
           contentTextStyle: TextStyle(
-            color: FahrplanColors.primary_accent_light_green(),
+            color: FahrplanColors.primaryAccentLightGreen(),
           ),
           shape: RoundedRectangleBorder(
               borderRadius: const BorderRadius.all(Radius.circular(0)),
               side: BorderSide(
-                  width: 2.0,
-                  color: FahrplanColors.primary_accent_dark_green())),
+                  width: 2.0, color: FahrplanColors.primaryAccentDarkGreen())),
           elevation: 30,
         ),
         appBarTheme: AppBarTheme(
-          color: FahrplanColors.base_black(),
+          color: FahrplanColors.baseBlack(),
           iconTheme: IconThemeData(
-            color: FahrplanColors.primary_accent_light_blue(),
+            color: FahrplanColors.primaryAccentLightBlue(),
           ),
         ),
         iconTheme: IconThemeData(
-          color: FahrplanColors.primary_accent_light_blue(),
+          color: FahrplanColors.primaryAccentLightBlue(),
         ),
         checkboxTheme: CheckboxThemeData(
           fillColor: WidgetStateProperty.resolveWith<Color?>(
@@ -179,7 +178,7 @@ class ThemeWrapper extends StatelessWidget {
                 return null;
               }
               if (states.contains(WidgetState.selected)) {
-                return FahrplanColors.primary_accent_light_blue();
+                return FahrplanColors.primaryAccentLightBlue();
               }
               return null;
             },
@@ -192,7 +191,7 @@ class ThemeWrapper extends StatelessWidget {
                 return null;
               }
               if (states.contains(WidgetState.selected)) {
-                return FahrplanColors.primary_accent_light_blue();
+                return FahrplanColors.primaryAccentLightBlue();
               }
               return null;
             },
@@ -205,7 +204,7 @@ class ThemeWrapper extends StatelessWidget {
               return null;
             }
             if (states.contains(WidgetState.selected)) {
-              return FahrplanColors.primary_accent_light_blue();
+              return FahrplanColors.primaryAccentLightBlue();
             }
             return null;
           }),
@@ -215,13 +214,13 @@ class ThemeWrapper extends StatelessWidget {
               return null;
             }
             if (states.contains(WidgetState.selected)) {
-              return FahrplanColors.primary_accent_light_blue();
+              return FahrplanColors.primaryAccentLightBlue();
             }
             return null;
           }),
         ),
         dialogTheme:
-            DialogThemeData(backgroundColor: FahrplanColors.base_black()),
+            DialogThemeData(backgroundColor: FahrplanColors.baseBlack()),
       ),
       home: CongressFahrplanApp(key: key),
     );
@@ -249,7 +248,7 @@ class CongressFahrplanApp extends StatelessWidget {
               } else {
                 return SafeArea(
                   child: Scaffold(
-                    backgroundColor: FahrplanColors.base_black(),
+                    backgroundColor: FahrplanColors.baseBlack(),
                     body: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
@@ -268,7 +267,7 @@ class CongressFahrplanApp extends StatelessWidget {
             } else {
               return SafeArea(
                 child: Scaffold(
-                  backgroundColor: FahrplanColors.base_black(),
+                  backgroundColor: FahrplanColors.baseBlack(),
                   body: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
