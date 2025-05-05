@@ -73,24 +73,28 @@ class Fahrplan {
 
   Widget buildDayLayout(BuildContext context) {
     dayTabCache = TabBarView(
-      children: this.conference!.buildDayTabs(),
+      children: conference!.buildDayTabs(),
     );
-    return new DefaultTabController(
+    return DefaultTabController(
       length: conference!.daysCount!,
-      child: new Scaffold(
-        appBar: new AppBar(
-          title: Text(getFahrplanTitle(), style: TextStyle(fontFamily: 'GabriellaHeavy'),),
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text(
+            getFahrplanTitle(),
+            style: const TextStyle(fontFamily: 'GabriellaHeavy'),
+          ),
           bottom: PreferredSize(
+            preferredSize: const Size.fromHeight(50),
             child: TabBar(
               tabs: conference!.getDaysAsText(),
               indicator: UnderlineTabIndicator(
-                borderSide: BorderSide(color: Theme.of(context).indicatorColor, width: 5.0),
+                borderSide: BorderSide(
+                    color: Theme.of(context).indicatorColor, width: 5.0),
               ),
             ),
-            preferredSize: Size.fromHeight(50),
           ),
         ),
-        drawer: FahrplanDrawer(
+        drawer: const FahrplanDrawer(
           title: 'Overview',
         ),
         body: dayTabCache,
@@ -100,9 +104,9 @@ class Fahrplan {
 
   /// Room layout is shown when in landscape mode
   Widget buildRoomLayout(BuildContext context) {
-    return new Scaffold(
-      appBar: new AppBar(
-        title: Text(getFahrplanTitle() + ' - This view is still experimental'),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('${getFahrplanTitle()} - This view is still experimental'),
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -133,7 +137,7 @@ class Fahrplan {
           ),
         ],
       ),
-      drawer: FahrplanDrawer(
+      drawer: const FahrplanDrawer(
         title: 'Overview',
       ),
     );
@@ -141,10 +145,10 @@ class Fahrplan {
 
   Widget _buildCarousel(BuildContext context, Day d, int index) {
     if (index >= days!.length) {
-      return Column();
+      return const Column();
     } else {
       return Column(
-        key: PageStorageKey(d.date.toString() + '$index'),
+        key: PageStorageKey('${d.date}$index'),
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
@@ -172,11 +176,11 @@ class Fahrplan {
     int month = d.date!.month;
     int day = d.date!.day;
     return Padding(
-      padding: EdgeInsets.fromLTRB(8, 0, 8, 16),
+      padding: const EdgeInsets.fromLTRB(8, 0, 8, 16),
       child: Container(
         decoration: BoxDecoration(
           color: Theme.of(context).appBarTheme.backgroundColor,
-          borderRadius: BorderRadius.all(Radius.circular(4.0)),
+          borderRadius: const BorderRadius.all(Radius.circular(4.0)),
         ),
         child: Column(
           children: <Widget>[
@@ -209,7 +213,7 @@ class Fahrplan {
         Column(
           children: <Widget>[
             Expanded(
-              child: new ListView.builder(
+              child: ListView.builder(
                 itemCount: widgets.length,
                 itemBuilder: (context, index) {
                   return widgets[index];

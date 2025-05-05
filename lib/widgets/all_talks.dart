@@ -13,12 +13,12 @@ import 'package:provider/provider.dart';
 class AllTalks extends StatelessWidget {
   final ThemeData? theme;
 
-  AllTalks({Key? key, this.theme}) : super(key: key);
+  const AllTalks({Key? key, this.theme}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     var favorites = Provider.of<FavoriteProvider>(context);
-    return new MaterialApp(
+    return MaterialApp(
       theme: theme,
       title: favorites.fahrplan!.getFahrplanTitle(),
       home: OrientationBuilder(
@@ -49,8 +49,8 @@ class AllTalks extends StatelessWidget {
       showDialog(
         context: context,
         builder: (BuildContext context) => SimpleDialog(
-          contentPadding: EdgeInsets.all(10),
-          title: Text(
+          contentPadding: const EdgeInsets.all(10),
+          title: const Text(
               'The RC3 Fahrplan is not yet released, therefore the Fahrplan from last year is shown.'),
           children: <Widget>[
             Semantics(
@@ -61,7 +61,7 @@ class AllTalks extends StatelessWidget {
                     provider.oldTalkNoticeDismissed = true;
                     Navigator.pop(context);
                   },
-                  child: Text('Dismiss'),
+                  child: const Text('Dismiss'),
                 ),
               ),
             )

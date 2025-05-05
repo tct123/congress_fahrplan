@@ -32,7 +32,7 @@ class FahrplanDecoder {
     // Create a reduced list of rooms and assign it to the fahrplan
     List<Room> reducedRooms = [];
     for (Room r in allRooms) {
-      if (reducedRooms.length != 0) {
+      if (reducedRooms.isNotEmpty) {
         // If room with specific name already exists, add the talks to this room, otherwise add the new room
         if (reducedRooms.any((room) => room.name == r.name)) {
           reducedRooms

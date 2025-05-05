@@ -33,7 +33,8 @@ class Talk extends StatelessWidget {
   bool? favorite;
 
   Talk(
-      {this.id,
+      {Key? key,
+      this.id,
       this.title,
       this.track,
       this.subtitle,
@@ -45,23 +46,22 @@ class Talk extends StatelessWidget {
       this.language,
       this.url,
       this.persons,
-      this.favorite});
+      this.favorite})
+      : super(key: key);
 
   factory Talk.fromJson(var json, String room) {
     return Talk(
-      id: json['id'] != null ? json['id'] : 0,
-      title: json['title'] != null ? json['title'] : "",
-      track: json['track'] != null ? json['track'] : "",
-      subtitle: json['subtitle'] != null ? json['subtitle'] : "",
-      abstract: json['abstract'] != null
-          ? json['abstract']
-          : (json['description'] != null ? json['description'] : ""),
-      start: json['start'] != null ? json['start'] : "",
-      duration: json['duration'] != null ? json['duration'] : "",
+      id: json['id'] ?? 0,
+      title: json['title'] ?? "",
+      track: json['track'] ?? "",
+      subtitle: json['subtitle'] ?? "",
+      abstract: json['abstract'] ?? (json['description'] ?? ""),
+      start: json['start'] ?? "",
+      duration: json['duration'] ?? "",
       room: room,
-      language: json['language'] != null ? json['language'] : "",
+      language: json['language'] ?? "",
       date: DateTime.parse(json['date']),
-      url: json['url'] != null ? json['url'] : "",
+      url: json['url'] ?? "",
       persons:
           json['persons'] != null ? jsonToPersonList(json['persons']) : null,
       favorite: false,
@@ -77,7 +77,7 @@ class Talk extends StatelessWidget {
   }
 
   void setDay(DateTime d) {
-    this.day = d;
+    day = d;
   }
 
   @override
@@ -111,14 +111,14 @@ class Talk extends StatelessWidget {
                   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                     content: favorite == true
                         ? Text(
-                            '\"$title\" added to favorites.',
+                            '"$title" added to favorites.',
                             style: const TextStyle(
                               fontFamily: 'VcrOcdFaux',
                               fontWeight: FontWeight.bold,
                             ),
                           )
                         : Text(
-                            '\"$title\" removed from favorites.',
+                            '"$title" removed from favorites.',
                             style: const TextStyle(
                               fontFamily: 'VcrOcdFaux',
                               fontWeight: FontWeight.bold,
@@ -157,7 +157,7 @@ class Talk extends StatelessWidget {
                         color: FahrplanColors.primary_accent_dark_red(),
                       ),
                     ),
-                    contentPadding: EdgeInsets.all(10),
+                    contentPadding: const EdgeInsets.all(10),
                     title: Text('$title'),
                     children: <Widget>[
                       BlockSemantics(
@@ -171,7 +171,7 @@ class Talk extends StatelessWidget {
                           Semantics(
                             label: 'Copy abstract.',
                             child: IconButton(
-                              icon: Icon(Icons.content_copy),
+                              icon: const Icon(Icons.content_copy),
                               color: FahrplanColors.primary_accent_light_red(),
                               tooltip: 'Copy abstract.',
                               onPressed: () {
@@ -211,14 +211,12 @@ class Talk extends StatelessWidget {
   Semantics getCardSubtitle() {
     String textString = '';
     textString = textString +
-        ('$start' != ''
-            ? ('$room' != '' ? '$start' + ' - ' : '$start')
-            : ' - ');
+        ('$start' != '' ? ('$room' != '' ? '$start' ' - ' : '$start') : ' - ');
     textString = textString +
-        ('$room' != '' ? ('$track' != '' ? '$room' + ' - ' : '$room') : ' - ');
+        ('$room' != '' ? ('$track' != '' ? '$room' ' - ' : '$room') : ' - ');
     textString = textString +
         ('$track' != ''
-            ? ('$language' != '' ? '$track' + ' - ' : '$track')
+            ? ('$language' != '' ? '$track' ' - ' : '$track')
             : ' - ');
     textString = textString + ('$language' != '' ? '$language' : '');
     return Semantics(
@@ -413,7 +411,7 @@ class Talk extends StatelessWidget {
     }
 
     /// Add the persons details
-    if (persons!.length > 0) {
+    if (persons!.isNotEmpty) {
       for (Person p in persons!) {
         widgets.add(Semantics(
           label: 'Presenter ${p.publicName}',

@@ -49,7 +49,7 @@ class FavoriteProvider extends ChangeNotifier {
       /// 2. favorite is not set and (if favorites has elements) ,
       /// 3. that the talk not exists in favorite talks
       if (t.id == talk.id && !t.favorite!) {
-        if (fahrplan!.favoriteTalks!.length > 0) {
+        if (fahrplan!.favoriteTalks!.isNotEmpty) {
           for (Talk fav in fahrplan!.favoriteTalks!) {
             if (fav.id == talk.id) {
               return;

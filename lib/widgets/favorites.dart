@@ -11,21 +11,21 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class Favorites extends StatelessWidget {
-  Favorites({Key? key}) : super(key: key);
+  const Favorites({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     // The StoreProvider should wrap your MaterialApp or WidgetsApp. This will
     // ensure all routes have access to the store.
     var favorites = Provider.of<FavoriteProvider>(context);
-    return new MaterialApp(
+    return MaterialApp(
       theme: Theme.of(context),
       title: favorites.fahrplan!.getFahrplanTitle(),
-      home: new DefaultTabController(
+      home: DefaultTabController(
         length: favorites.fahrplan!.days!.length,
-        child: new Scaffold(
-          appBar: new AppBar(
-            title: new Text(favorites.fahrplan!.getFavoritesTitle()),
+        child: Scaffold(
+          appBar: AppBar(
+            title: Text(favorites.fahrplan!.getFavoritesTitle()),
             bottom: TabBar(
               tabs: favorites.fahrplan!.conference!.getDaysAsText(),
               indicator: UnderlineTabIndicator(
@@ -33,7 +33,7 @@ class Favorites extends StatelessWidget {
               ),
             ),
           ),
-          drawer: FahrplanDrawer(
+          drawer: const FahrplanDrawer(
             title: 'Favorites',
           ),
           body: TabBarView(

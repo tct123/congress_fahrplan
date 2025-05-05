@@ -31,7 +31,7 @@ class FileStorage {
     final file = await localDataFile;
 
     // Write the file
-    return file.writeAsString('$data', mode: FileMode.write);
+    return file.writeAsString(data, mode: FileMode.write);
   }
 
   static Future<String> readDataFile() async {
@@ -62,7 +62,7 @@ class FileStorage {
     final file = await localIfNoneMatchFile;
 
     // Write the file
-    return file.writeAsString('$data', mode: FileMode.write);
+    return file.writeAsString(data, mode: FileMode.write);
   }
 
   static Future<String> readIfNoneMatchFile() async {
@@ -93,7 +93,7 @@ class FileStorage {
     final file = await localFavoriteFile;
 
     // Write the file
-    return file.writeAsString('$data', mode: FileMode.write);
+    return file.writeAsString(data, mode: FileMode.write);
   }
 
   static Future<String> readFavoritesFile() async {
@@ -125,7 +125,7 @@ class FileStorage {
     final file = await localSettingsFile;
 
     // Write the file
-    return file.writeAsString('$data', mode: FileMode.write);
+    return file.writeAsString(data, mode: FileMode.write);
   }
 
   static Future<String> readSettingsFile() async {

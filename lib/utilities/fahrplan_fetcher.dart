@@ -46,7 +46,7 @@ class FahrplanFetcher {
       String favoriteData = await favoriteFile.readAsString();
       favTalks = FavoritedTalks.fromJson(json.decode(favoriteData));
     } else {
-      favTalks = new FavoritedTalks(
+      favTalks = FavoritedTalks(
         ids: List<int>.empty(growable: true),
       );
     }
@@ -87,7 +87,7 @@ class FahrplanFetcher {
         /// Only Main Rooms Fahrplan
         requestString = FahrplanFetcher.minimalFahrplanUrl;
       }
-      final Uri uri = Uri.parse('$requestString');
+      final Uri uri = Uri.parse(requestString);
       final response = await http
           .get(
             uri,
@@ -103,7 +103,7 @@ class FahrplanFetcher {
       ///Else if the HTTP Status Code is 304 Not Modified use the local file.
       ///Else if a local fahrplan file is available use it
       ///Else return empty fahrplan
-      if (response.statusCode == 200 && response.bodyBytes.length > 0) {
+      if (response.statusCode == 200 && response.bodyBytes.isNotEmpty) {
         fahrplanJson = utf8.decode(response.bodyBytes);
 
         /// Store the etag
@@ -111,12 +111,12 @@ class FahrplanFetcher {
         if (response.headers.containsKey('etag')) {
           etag = response.headers['etag']!;
         }
-        FileStorage.writeIfNoneMatchFile('$etag');
+        FileStorage.writeIfNoneMatchFile(etag);
 
         /// Store the fetched JSON
         FileStorage.writeDataFile(fahrplanJson);
 
-        return new FahrplanDecoder().decodeFahrplanFromJson(
+        return FahrplanDecoder().decodeFahrplanFromJson(
           json.decode(fahrplanJson)['schedule'],
           favTalks,
           settings,
@@ -125,7 +125,7 @@ class FahrplanFetcher {
       } else if (response.statusCode == 304) {
         fahrplanJson = await fahrplanFile.readAsString();
         if (fahrplanJson != '') {
-          return new FahrplanDecoder().decodeFahrplanFromJson(
+          return FahrplanDecoder().decodeFahrplanFromJson(
             json.decode(fahrplanJson)['schedule'],
             favTalks,
             settings,
@@ -133,7 +133,7 @@ class FahrplanFetcher {
           );
         }
       } else {
-        return new Fahrplan(
+        return Fahrplan(
           fetchState: FahrplanFetchState.timeout,
           fetchMessage: 'Please check your network connection.',
         );
@@ -143,20 +143,20 @@ class FahrplanFetcher {
     } else {
       fahrplanJson = await fahrplanFile.readAsString();
       if (fahrplanJson != '') {
-        return new FahrplanDecoder().decodeFahrplanFromJson(
+        return FahrplanDecoder().decodeFahrplanFromJson(
           json.decode(fahrplanJson)['schedule'],
           favTalks,
           settings,
           FahrplanFetchState.successful,
         );
       } else {
-        return new Fahrplan(
+        return Fahrplan(
           fetchState: FahrplanFetchState.noDataConnection,
           fetchMessage: 'Please enable mobile data or Wifi.',
         );
       }
     }
-    return new Fahrplan(
+    return Fahrplan(
       fetchState: FahrplanFetchState.noDataConnection,
       fetchMessage: 'Could not fetch Fahrplan.',
     );

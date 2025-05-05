@@ -7,7 +7,7 @@ class Person {
   factory Person.fromJson(var json) {
     return Person(
       id: json['id'] != null ? '${json['id']}' : '',
-      publicName: json['name'] != null ? json['name'] : '',
+      publicName: json['name'] ?? '',
     );
   }
 }

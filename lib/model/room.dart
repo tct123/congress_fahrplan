@@ -15,10 +15,11 @@ class Room extends StatelessWidget {
   static int numberOfRooms = 0;
   static List<String> namesOfRooms = [];
 
-  Room({
+  const Room({
+    Key? key,
     this.name,
     this.talks,
-  });
+  }) : super(key: key);
 
   factory Room.fromJson(var json, String name, DateTime day) {
     return Room(name: name, talks: jsonToTalkList(json, name, day));
@@ -36,6 +37,6 @@ class Room extends StatelessWidget {
 
   @override
   build(BuildContext context) {
-    return Card();
+    return const Card();
   }
 }

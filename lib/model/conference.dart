@@ -40,7 +40,7 @@ class Conference {
     );
     c.daysCount = 0;
     for (Day d in c.days!) {
-      if (d.talks!.length > 0) {
+      if (d.talks!.isNotEmpty) {
         c.daysCount = c.daysCount! + 1;
       }
     }
@@ -51,7 +51,7 @@ class Conference {
     List<Day> days = [];
     for (var j in json) {
       Day d = Day.fromJson(j);
-      if (d.talks!.length > 0) {
+      if (d.talks!.isNotEmpty) {
         days.add(d);
       }
     }
@@ -61,7 +61,7 @@ class Conference {
   List<Widget> buildDayTabs() {
     List<Column> dayColumns = [];
     for (Day d in days!) {
-      if (d.talks!.length > 0) {
+      if (d.talks!.isNotEmpty) {
         List<Widget> widgets = [];
         widgets.addAll(d.talks!);
         dayColumns.add(
@@ -86,32 +86,30 @@ class Conference {
   List<Widget> getDaysAsText() {
     List<Widget> dayTexts = [];
     for (Day d in days!) {
-      if (d.talks!.length == 0) {
+      if (d.talks!.isEmpty) {
         continue;
       }
-      String weekday = new DateFormat.E().format(d.date!);
+      String weekday = DateFormat.E().format(d.date!);
 
-      String dateString =
-          d.date!.month.toString() + '-' + d.date!.day.toString();
-      String semanticsDay = new DateFormat.EEEE().format(d.date!) +
-          ' ' +
-          new DateFormat.yMMMMd().format(d.date!);
+      String dateString = '${d.date!.month}-${d.date!.day}';
+      String semanticsDay =
+          '${DateFormat.EEEE().format(d.date!)} ${DateFormat.yMMMMd().format(d.date!)}';
       dayTexts.add(
-        new Semantics(
+        Semantics(
           label: semanticsDay,
           child: ExcludeSemantics(
             child: Column(
               children: [
                 Text(
-                  '$weekday',
-                  style: TextStyle(
+                  weekday,
+                  style: const TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 24,
                   ),
                 ),
                 Text(
-                  '$dateString',
-                  style: TextStyle(
+                  dateString,
+                  style: const TextStyle(
                     fontSize: 16,
                   ),
                 ),

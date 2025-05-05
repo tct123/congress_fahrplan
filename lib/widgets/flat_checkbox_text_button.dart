@@ -12,7 +12,9 @@ class FlatCheckBoxTextButton extends StatelessWidget {
   final String? text;
   final Function? onPressed;
 
-  FlatCheckBoxTextButton({this.value, this.text, this.onPressed});
+  const FlatCheckBoxTextButton(
+      {Key? key, this.value, this.text, this.onPressed})
+      : super(key: key);
 
   @override
   build(BuildContext context) {
@@ -24,7 +26,7 @@ class FlatCheckBoxTextButton extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
                 Container(
-                  padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
+                  padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
                   child: Checkbox(
                     value: value,
                     onChanged: null,
@@ -32,7 +34,7 @@ class FlatCheckBoxTextButton extends StatelessWidget {
                   ),
                 ),
                 Container(
-                  padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
+                  padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
                   child: Text(
                     text!,
                     style: Theme.of(context).textTheme.titleSmall,

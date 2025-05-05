@@ -13,6 +13,7 @@ import 'package:congress_fahrplan/widgets/flat_checkbox_text_button.dart';
 import 'package:congress_fahrplan/widgets/flat_icon_text_button.dart';
 import 'package:congress_fahrplan/widgets/sync_calendar.dart';
 import 'package:device_calendar/device_calendar.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
@@ -20,7 +21,7 @@ import 'package:url_launcher/url_launcher.dart';
 
 class FahrplanDrawer extends StatelessWidget {
   final String? title;
-  FahrplanDrawer({this.title});
+  const FahrplanDrawer({Key? key, this.title}) : super(key: key);
 
   @override
   build(BuildContext context) {
@@ -37,7 +38,7 @@ class FahrplanDrawer extends StatelessWidget {
         leading: Semantics(
           label: 'Close menu',
           child: IconButton(
-            icon: Icon(Icons.navigate_before),
+            icon: const Icon(Icons.navigate_before),
             onPressed: () => Navigator.pop(context),
           ),
         ),
@@ -65,11 +66,13 @@ class FahrplanDrawer extends StatelessWidget {
                   icon: Icons.favorite,
                   text: 'Show Favorites',
                   onPressed: () {
-                    print('Show favorites pressed.');
+                    if (kDebugMode) {
+                      print('Show favorites pressed.');
+                    }
                     Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => Favorites(),
+                        builder: (context) => const Favorites(),
                       ),
                     );
                   },
@@ -111,12 +114,12 @@ class FahrplanDrawer extends StatelessWidget {
           FlatIconTextButton(
             icon: Icons.color_lens,
             text: 'Design adapted from 37c3 design',
-            onPressed: () => {},//launchUrlInternal('https://kreatur.works/'),
+            onPressed: () => {}, //launchUrlInternal('https://kreatur.works/'),
           ),
           Container(
-            padding: EdgeInsets.fromLTRB(32, 0, 0, 0),
+            padding: const EdgeInsets.fromLTRB(32, 0, 0, 0),
             child: Text(
-              'Version: ' + favorites.packageVersion,
+              'Version: ${favorites.packageVersion}',
             ),
           ),
         ],
@@ -140,8 +143,8 @@ class FahrplanDrawer extends StatelessWidget {
       showDialog(
         context: context,
         builder: (BuildContext context) => SimpleDialog(
-          contentPadding: EdgeInsets.all(10),
-          title: Text('Sync favorites'),
+          contentPadding: const EdgeInsets.all(10),
+          title: const Text('Sync favorites'),
           children: <Widget>[
             SyncCalendar(
               calendarPlugin: deviceCalendar,
