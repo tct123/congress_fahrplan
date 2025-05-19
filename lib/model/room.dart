@@ -15,11 +15,7 @@ class Room extends StatelessWidget {
   static int numberOfRooms = 0;
   static List<String> namesOfRooms = [];
 
-  const Room({
-    Key? key,
-    this.name,
-    this.talks,
-  }) : super(key: key);
+  const Room({super.key, this.name, this.talks});
 
   factory Room.fromJson(var json, String name, DateTime day) {
     return Room(name: name, talks: jsonToTalkList(json, name, day));

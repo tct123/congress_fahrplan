@@ -13,7 +13,7 @@ import 'package:provider/provider.dart';
 class AllTalks extends StatelessWidget {
   final ThemeData? theme;
 
-  const AllTalks({Key? key, this.theme}) : super(key: key);
+  const AllTalks({super.key, this.theme});
 
   @override
   Widget build(BuildContext context) {
@@ -26,12 +26,16 @@ class AllTalks extends StatelessWidget {
           if (orientation == Orientation.portrait) {
             ///Portrait Orientation
             Future.delayed(
-                Duration.zero, () => openOutdatedDialog(context, favorites));
+              Duration.zero,
+              () => openOutdatedDialog(context, favorites),
+            );
             return favorites.fahrplan!.buildDayLayout(context);
           } else {
             ///Landscape Orientation
             Future.delayed(
-                Duration.zero, () => openOutdatedDialog(context, favorites));
+              Duration.zero,
+              () => openOutdatedDialog(context, favorites),
+            );
             return favorites.fahrplan!.buildRoomLayout(context);
           }
         },
@@ -41,32 +45,36 @@ class AllTalks extends StatelessWidget {
 
   openOutdatedDialog(BuildContext context, FavoriteProvider provider) {
     /// Show only when URLs are outdated and notice has not been dismissed yet
-    if ((FahrplanFetcher.oldUrls
-                .contains(FahrplanFetcher.completeFahrplanUrl) ||
-            FahrplanFetcher.oldUrls
-                .contains(FahrplanFetcher.minimalFahrplanUrl)) &&
+    if ((FahrplanFetcher.oldUrls.contains(
+              FahrplanFetcher.completeFahrplanUrl,
+            ) ||
+            FahrplanFetcher.oldUrls.contains(
+              FahrplanFetcher.minimalFahrplanUrl,
+            )) &&
         !provider.oldTalkNoticeDismissed) {
       showDialog(
         context: context,
-        builder: (BuildContext context) => SimpleDialog(
-          contentPadding: const EdgeInsets.all(10),
-          title: const Text(
-              'The RC3 Fahrplan is not yet released, therefore the Fahrplan from last year is shown.'),
-          children: <Widget>[
-            Semantics(
-              label: 'Dismiss',
-              child: ExcludeSemantics(
-                child: TextButton(
-                  onPressed: () {
-                    provider.oldTalkNoticeDismissed = true;
-                    Navigator.pop(context);
-                  },
-                  child: const Text('Dismiss'),
-                ),
+        builder:
+            (BuildContext context) => SimpleDialog(
+              contentPadding: const EdgeInsets.all(10),
+              title: const Text(
+                'The RC3 Fahrplan is not yet released, therefore the Fahrplan from last year is shown.',
               ),
-            )
-          ],
-        ),
+              children: <Widget>[
+                Semantics(
+                  label: 'Dismiss',
+                  child: ExcludeSemantics(
+                    child: TextButton(
+                      onPressed: () {
+                        provider.oldTalkNoticeDismissed = true;
+                        Navigator.pop(context);
+                      },
+                      child: const Text('Dismiss'),
+                    ),
+                  ),
+                ),
+              ],
+            ),
       );
     }
   }

@@ -32,22 +32,22 @@ class Talk extends StatelessWidget {
   final List<Person>? persons;
   bool? favorite;
 
-  Talk(
-      {Key? key,
-      this.id,
-      this.title,
-      this.track,
-      this.subtitle,
-      this.abstract,
-      this.start,
-      this.duration,
-      this.room,
-      this.date,
-      this.language,
-      this.url,
-      this.persons,
-      this.favorite})
-      : super(key: key);
+  Talk({
+    super.key,
+    this.id,
+    this.title,
+    this.track,
+    this.subtitle,
+    this.abstract,
+    this.start,
+    this.duration,
+    this.room,
+    this.date,
+    this.language,
+    this.url,
+    this.persons,
+    this.favorite,
+  });
 
   factory Talk.fromJson(var json, String room) {
     return Talk(
@@ -100,46 +100,48 @@ class Talk extends StatelessWidget {
           subtitle: getCardSubtitle(),
           leading: Ink(
             child: Consumer<FavoriteProvider>(
-              builder: (context, favoriteProvider, child) => IconButton(
-                tooltip: "Add talk $title to favorites.",
-                icon: Icon(
-                  favorite! ? Icons.favorite : Icons.favorite_border,
-                ),
-                color: FahrplanColors
-                    .primaryAccentLightBlue(), //primary_accent_light_blue
-                onPressed: () {
-                  favoriteProvider.favoriteTalk(this, day!);
-                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                    content: favorite == true
-                        ? Text(
-                            '"$title" added to favorites.',
-                            style: const TextStyle(
-                              fontFamily: 'VcrOcdFaux',
-                              fontWeight: FontWeight.bold,
-                            ),
-                          )
-                        : Text(
-                            '"$title" removed from favorites.',
-                            style: const TextStyle(
-                              fontFamily: 'VcrOcdFaux',
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                    action: SnackBarAction(
-                      label: "Revert",
-                      onPressed: () =>
-                          favoriteProvider.favoriteTalk(this, day!),
+              builder:
+                  (context, favoriteProvider, child) => IconButton(
+                    tooltip: "Add talk $title to favorites.",
+                    icon: Icon(
+                      favorite! ? Icons.favorite : Icons.favorite_border,
                     ),
-                    duration: const Duration(seconds: 2),
-                  ));
-                },
-              ),
+                    color:
+                        FahrplanColors.primaryAccentLightBlue(), //primary_accent_light_blue
+                    onPressed: () {
+                      favoriteProvider.favoriteTalk(this, day!);
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content:
+                              favorite == true
+                                  ? Text(
+                                    '"$title" added to favorites.',
+                                    style: const TextStyle(
+                                      fontFamily: 'VcrOcdFaux',
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  )
+                                  : Text(
+                                    '"$title" removed from favorites.',
+                                    style: const TextStyle(
+                                      fontFamily: 'VcrOcdFaux',
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                          action: SnackBarAction(
+                            label: "Revert",
+                            onPressed:
+                                () => favoriteProvider.favoriteTalk(this, day!),
+                          ),
+                          duration: const Duration(seconds: 2),
+                        ),
+                      );
+                    },
+                  ),
             ),
           ),
           trailing: Ink(
-            decoration: const ShapeDecoration(
-              shape: CircleBorder(),
-            ),
+            decoration: const ShapeDecoration(shape: CircleBorder()),
             child: IconButton(
               tooltip: "Show talk $title details.",
               icon: Icon(
@@ -149,58 +151,58 @@ class Talk extends StatelessWidget {
               onPressed: () {
                 showDialog(
                   context: context,
-                  builder: (context) => SimpleDialog(
-                    backgroundColor: FahrplanColors.baseBlack(),
-                    shape: ContinuousRectangleBorder(
-                      borderRadius: BorderRadius.circular(0.0),
-                      side: BorderSide(
-                        width: 2.0,
-                        color: FahrplanColors
-                            .primaryAccentDarkRed(), //primary_accent_dark_red
-                      ),
-                    ),
-                    contentPadding: const EdgeInsets.all(10),
-                    title: Text('$title'),
-                    children: <Widget>[
-                      BlockSemantics(
-                        child: Column(
-                          children: getDetails(),
-                        ),
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: <Widget>[
-                          Semantics(
-                            label: 'Copy abstract.',
-                            child: IconButton(
-                              icon: const Icon(Icons.content_copy),
-                              color: FahrplanColors
-                                  .primaryAccentLightRed(), //primaryAccentLightRed
-                              tooltip: 'Copy abstract.',
-                              onPressed: () {
-                                Clipboard.setData(
-                                    ClipboardData(text: abstract!));
-                              },
-                            ),
+                  builder:
+                      (context) => SimpleDialog(
+                        backgroundColor: FahrplanColors.baseBlack(),
+                        shape: ContinuousRectangleBorder(
+                          borderRadius: BorderRadius.circular(0.0),
+                          side: BorderSide(
+                            width: 2.0,
+                            color:
+                                FahrplanColors.primaryAccentDarkRed(), //primary_accent_dark_red
                           ),
-                          Semantics(
-                            label: 'Share $title',
-                            child: ExcludeSemantics(
-                              child: IconButton(
-                                icon: const Icon(
-                                  Icons.share,
+                        ),
+                        contentPadding: const EdgeInsets.all(10),
+                        title: Text('$title'),
+                        children: <Widget>[
+                          BlockSemantics(child: Column(children: getDetails())),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: <Widget>[
+                              Semantics(
+                                label: 'Copy abstract.',
+                                child: IconButton(
+                                  icon: const Icon(Icons.content_copy),
+                                  color:
+                                      FahrplanColors.primaryAccentLightRed(), //primaryAccentLightRed
+                                  tooltip: 'Copy abstract.',
+                                  onPressed: () {
+                                    Clipboard.setData(
+                                      ClipboardData(text: abstract!),
+                                    );
+                                  },
                                 ),
-                                color: FahrplanColors.primaryAccentLightRed(),
-                                tooltip: 'Share talk.',
-                                onPressed: () => SharePlus.share(
-                                    'Check out this talk: $url' as ShareParams),
                               ),
-                            ),
+                              Semantics(
+                                label: 'Share $title',
+                                child: ExcludeSemantics(
+                                  child: IconButton(
+                                    icon: const Icon(Icons.share),
+                                    color:
+                                        FahrplanColors.primaryAccentLightRed(),
+                                    tooltip: 'Share talk.',
+                                    onPressed:
+                                        () => SharePlus.share(
+                                          'Check out this talk: $url'
+                                              as ShareParams,
+                                        ),
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
                         ],
-                      )
-                    ],
-                  ),
+                      ),
                 );
               },
             ),
@@ -212,13 +214,29 @@ class Talk extends StatelessWidget {
 
   Semantics getCardSubtitle() {
     String textString = '';
-    textString = textString +
-        ('$start' != '' ? ('$room' != '' ? '$start' ' - ' : '$start') : ' - ');
-    textString = textString +
-        ('$room' != '' ? ('$track' != '' ? '$room' ' - ' : '$room') : ' - ');
-    textString = textString +
+    textString =
+        textString +
+        ('$start' != ''
+            ? ('$room' != ''
+                ? '$start'
+                    ' - '
+                : '$start')
+            : ' - ');
+    textString =
+        textString +
+        ('$room' != ''
+            ? ('$track' != ''
+                ? '$room'
+                    ' - '
+                : '$room')
+            : ' - ');
+    textString =
+        textString +
         ('$track' != ''
-            ? ('$language' != '' ? '$track' ' - ' : '$track')
+            ? ('$language' != ''
+                ? '$track'
+                    ' - '
+                : '$track')
             : ' - ');
     textString = textString + ('$language' != '' ? '$language' : '');
     return Semantics(
@@ -226,9 +244,7 @@ class Talk extends StatelessWidget {
       child: ExcludeSemantics(
         child: Text(
           textString,
-          style: const TextStyle(
-            fontFamily: 'VcrOcdFaux',
-          ),
+          style: const TextStyle(fontFamily: 'VcrOcdFaux'),
         ),
       ),
     );
@@ -246,8 +262,10 @@ class Talk extends StatelessWidget {
             padding: const EdgeInsets.fromLTRB(0, 5, 0, 5),
             child: Text(
               '$subtitle',
-              style:
-                  const TextStyle(fontWeight: FontWeight.bold, fontSize: 16.0),
+              style: const TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 16.0,
+              ),
             ),
           ),
         ),
@@ -269,9 +287,7 @@ class Talk extends StatelessWidget {
                     color: FahrplanColors.primaryAccentLightRed(),
                   ),
                 ),
-                Text(
-                  '$start',
-                ),
+                Text('$start'),
               ],
             ),
           ),
@@ -294,9 +310,7 @@ class Talk extends StatelessWidget {
                     color: FahrplanColors.primaryAccentLightRed(),
                   ),
                 ),
-                Text(
-                  '$duration',
-                ),
+                Text('$duration'),
               ],
             ),
           ),
@@ -319,9 +333,7 @@ class Talk extends StatelessWidget {
                     color: FahrplanColors.primaryAccentLightRed(),
                   ),
                 ),
-                Text(
-                  '$room',
-                ),
+                Text('$room'),
               ],
             ),
           ),
@@ -344,9 +356,7 @@ class Talk extends StatelessWidget {
                     color: FahrplanColors.primaryAccentLightRed(),
                   ),
                 ),
-                Text(
-                  '$track',
-                ),
+                Text('$track'),
               ],
             ),
           ),
@@ -369,9 +379,7 @@ class Talk extends StatelessWidget {
                     color: FahrplanColors.primaryAccentLightRed(),
                   ),
                 ),
-                Text(
-                  '$language',
-                ),
+                Text('$language'),
               ],
             ),
           ),
@@ -396,15 +404,13 @@ class Talk extends StatelessWidget {
                 ),
                 Expanded(
                   child: Linkify(
-                    linkStyle: TextStyle(
-                      color: FahrplanColors.baseWhite(),
-                    ),
+                    linkStyle: TextStyle(color: FahrplanColors.baseWhite()),
                     onOpen: (link) async {
                       launchUrlInternal(link.url);
                     },
                     text: "$url",
                   ),
-                )
+                ),
               ],
             ),
           ),
@@ -415,25 +421,29 @@ class Talk extends StatelessWidget {
     /// Add the persons details
     if (persons!.isNotEmpty) {
       for (Person p in persons!) {
-        widgets.add(Semantics(
-          label: 'Presenter ${p.publicName}',
-          child: ExcludeSemantics(
-            child: Row(
-              children: <Widget>[
-                Container(
-                  padding: const EdgeInsets.fromLTRB(0, 0, 10, 0),
-                  child: Icon(
-                    Icons.group,
-                    color: FahrplanColors.primaryAccentLightRed(),
+        widgets.add(
+          Semantics(
+            label: 'Presenter ${p.publicName}',
+            child: ExcludeSemantics(
+              child: Row(
+                children: <Widget>[
+                  Container(
+                    padding: const EdgeInsets.fromLTRB(0, 0, 10, 0),
+                    child: Icon(
+                      Icons.group,
+                      color: FahrplanColors.primaryAccentLightRed(),
+                    ),
                   ),
-                ),
-                Text(p.publicName!.length > 20
-                    ? '${p.publicName!.substring(0, 19)}...'
-                    : '${p.publicName}'),
-              ],
+                  Text(
+                    p.publicName!.length > 20
+                        ? '${p.publicName!.substring(0, 19)}...'
+                        : '${p.publicName}',
+                  ),
+                ],
+              ),
             ),
           ),
-        ));
+        );
       }
     }
 

@@ -12,12 +12,12 @@ class FlatIconTextButton extends StatelessWidget {
   final String text;
   final Function onPressed;
 
-  const FlatIconTextButton(
-      {Key? key,
-      required this.icon,
-      required this.text,
-      required this.onPressed})
-      : super(key: key);
+  const FlatIconTextButton({
+    super.key,
+    required this.icon,
+    required this.text,
+    required this.onPressed,
+  });
 
   @override
   build(BuildContext context) {
@@ -30,17 +30,15 @@ class FlatIconTextButton extends StatelessWidget {
             children: <Widget>[
               Container(
                 padding: const EdgeInsets.fromLTRB(12, 0, 0, 0),
-                child: Icon(
-                  icon,
-                  color: Theme.of(context).iconTheme.color,
-                ),
+                child: Icon(icon, color: Theme.of(context).iconTheme.color),
               ),
               Container(
-                  padding: const EdgeInsets.fromLTRB(12, 0, 0, 0),
-                  child: Text(
-                    text,
-                    style: Theme.of(context).textTheme.titleSmall,
-                  )),
+                padding: const EdgeInsets.fromLTRB(12, 0, 0, 0),
+                child: Text(
+                  text,
+                  style: Theme.of(context).textTheme.titleSmall,
+                ),
+              ),
             ],
           ),
         ),

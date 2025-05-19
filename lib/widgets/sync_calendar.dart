@@ -19,8 +19,7 @@ import 'package:timezone/data/latest.dart' as tz;
 class SyncCalendar extends StatelessWidget {
   final DeviceCalendarPlugin? calendarPlugin;
   final FavoriteProvider? provider;
-  const SyncCalendar({Key? key, this.calendarPlugin, this.provider})
-      : super(key: key);
+  const SyncCalendar({super.key, this.calendarPlugin, this.provider});
 
   @override
   Widget build(BuildContext context) {

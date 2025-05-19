@@ -12,39 +12,45 @@ class FlatCheckBoxTextButton extends StatelessWidget {
   final String? text;
   final Function? onPressed;
 
-  const FlatCheckBoxTextButton(
-      {Key? key, this.value, this.text, this.onPressed})
-      : super(key: key);
+  const FlatCheckBoxTextButton({
+    super.key,
+    this.value,
+    this.text,
+    this.onPressed,
+  });
 
   @override
   build(BuildContext context) {
     return TextButton(
-        child: Semantics(
-          label: 'Load complete fahrplan checkbox',
-          child: ExcludeSemantics(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: <Widget>[
-                Container(
-                  padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
-                  child: Checkbox(
-                    value: value,
-                    onChanged: null,
-                    checkColor: Theme.of(context)
-                        .toggleableActiveColor, //toggleableActiveColor
-                  ),
+      child: Semantics(
+        label: 'Load complete fahrplan checkbox',
+        child: ExcludeSemantics(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: <Widget>[
+              Container(
+                padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+                child: Checkbox(
+                  value: value,
+                  onChanged: null,
+                  checkColor:
+                      Theme.of(
+                        context,
+                      ).toggleableActiveColor, //toggleableActiveColor
                 ),
-                Container(
-                  padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
-                  child: Text(
-                    text!,
-                    style: Theme.of(context).textTheme.titleSmall,
-                  ),
+              ),
+              Container(
+                padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+                child: Text(
+                  text!,
+                  style: Theme.of(context).textTheme.titleSmall,
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
-        onPressed: () => onPressed!);
+      ),
+      onPressed: () => onPressed!,
+    );
   }
 }

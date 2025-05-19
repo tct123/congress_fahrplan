@@ -90,7 +90,7 @@ class FahrplanColors {
 }
 
 class ThemeWrapper extends StatelessWidget {
-  const ThemeWrapper({Key? key}) : super(key: key);
+  const ThemeWrapper({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -104,41 +104,21 @@ class ThemeWrapper extends StatelessWidget {
           brightness: Brightness.dark,
           primary: FahrplanColors.baseWhite(),
         ),
-        tabBarTheme: const TabBarTheme(
-          indicator: UnderlineTabIndicator(),
-        ),
+        tabBarTheme: const TabBarTheme(indicator: UnderlineTabIndicator()),
         primaryColor: FahrplanColors.baseWhite(),
         primaryColorLight: FahrplanColors.baseWhite(),
         primaryColorDark: FahrplanColors.baseBlack(),
         indicatorColor: FahrplanColors.primaryAccentLightBlue(),
         textTheme: TextTheme(
-          titleLarge: TextStyle(
-            color: FahrplanColors.baseWhite(),
-          ),
-          bodyMedium: TextStyle(
-            color: FahrplanColors.baseWhite(),
-          ),
-          bodyLarge: TextStyle(
-            color: FahrplanColors.baseWhite(),
-          ),
-          titleSmall: TextStyle(
-            color: FahrplanColors.baseWhite(),
-          ),
-          titleMedium: TextStyle(
-            color: FahrplanColors.baseWhite(),
-          ),
-          headlineMedium: TextStyle(
-            color: FahrplanColors.baseWhite(),
-          ),
-          bodySmall: TextStyle(
-            color: FahrplanColors.baseWhite(),
-          ),
-          labelSmall: TextStyle(
-            color: FahrplanColors.baseWhite(),
-          ),
-          headlineSmall: TextStyle(
-            color: FahrplanColors.baseWhite(),
-          ),
+          titleLarge: TextStyle(color: FahrplanColors.baseWhite()),
+          bodyMedium: TextStyle(color: FahrplanColors.baseWhite()),
+          bodyLarge: TextStyle(color: FahrplanColors.baseWhite()),
+          titleSmall: TextStyle(color: FahrplanColors.baseWhite()),
+          titleMedium: TextStyle(color: FahrplanColors.baseWhite()),
+          headlineMedium: TextStyle(color: FahrplanColors.baseWhite()),
+          bodySmall: TextStyle(color: FahrplanColors.baseWhite()),
+          labelSmall: TextStyle(color: FahrplanColors.baseWhite()),
+          headlineSmall: TextStyle(color: FahrplanColors.baseWhite()),
         ),
         cardTheme: CardTheme(
           color: FahrplanColors.baseBlack(),
@@ -157,9 +137,12 @@ class ThemeWrapper extends StatelessWidget {
             color: FahrplanColors.primaryAccentLightGreen(),
           ),
           shape: RoundedRectangleBorder(
-              borderRadius: const BorderRadius.all(Radius.circular(0)),
-              side: BorderSide(
-                  width: 2.0, color: FahrplanColors.primaryAccentDarkGreen())),
+            borderRadius: const BorderRadius.all(Radius.circular(0)),
+            side: BorderSide(
+              width: 2.0,
+              color: FahrplanColors.primaryAccentDarkGreen(),
+            ),
+          ),
           elevation: 30,
         ),
         appBarTheme: AppBarTheme(
@@ -172,34 +155,35 @@ class ThemeWrapper extends StatelessWidget {
           color: FahrplanColors.primaryAccentLightBlue(),
         ),
         checkboxTheme: CheckboxThemeData(
-          fillColor: WidgetStateProperty.resolveWith<Color?>(
-            (Set<WidgetState> states) {
-              if (states.contains(WidgetState.disabled)) {
-                return null;
-              }
-              if (states.contains(WidgetState.selected)) {
-                return FahrplanColors.primaryAccentLightBlue();
-              }
+          fillColor: WidgetStateProperty.resolveWith<Color?>((
+            Set<WidgetState> states,
+          ) {
+            if (states.contains(WidgetState.disabled)) {
               return null;
-            },
-          ),
+            }
+            if (states.contains(WidgetState.selected)) {
+              return FahrplanColors.primaryAccentLightBlue();
+            }
+            return null;
+          }),
         ),
         radioTheme: RadioThemeData(
-          fillColor: WidgetStateProperty.resolveWith<Color?>(
-            (Set<WidgetState> states) {
-              if (states.contains(WidgetState.disabled)) {
-                return null;
-              }
-              if (states.contains(WidgetState.selected)) {
-                return FahrplanColors.primaryAccentLightBlue();
-              }
+          fillColor: WidgetStateProperty.resolveWith<Color?>((
+            Set<WidgetState> states,
+          ) {
+            if (states.contains(WidgetState.disabled)) {
               return null;
-            },
-          ),
+            }
+            if (states.contains(WidgetState.selected)) {
+              return FahrplanColors.primaryAccentLightBlue();
+            }
+            return null;
+          }),
         ),
         switchTheme: SwitchThemeData(
-          thumbColor: WidgetStateProperty.resolveWith<Color?>(
-              (Set<WidgetState> states) {
+          thumbColor: WidgetStateProperty.resolveWith<Color?>((
+            Set<WidgetState> states,
+          ) {
             if (states.contains(WidgetState.disabled)) {
               return null;
             }
@@ -208,8 +192,9 @@ class ThemeWrapper extends StatelessWidget {
             }
             return null;
           }),
-          trackColor: WidgetStateProperty.resolveWith<Color?>(
-              (Set<WidgetState> states) {
+          trackColor: WidgetStateProperty.resolveWith<Color?>((
+            Set<WidgetState> states,
+          ) {
             if (states.contains(WidgetState.disabled)) {
               return null;
             }
@@ -219,8 +204,9 @@ class ThemeWrapper extends StatelessWidget {
             return null;
           }),
         ),
-        dialogTheme:
-            DialogThemeData(backgroundColor: FahrplanColors.baseBlack()),
+        dialogTheme: DialogThemeData(
+          backgroundColor: FahrplanColors.baseBlack(),
+        ),
       ),
       home: CongressFahrplanApp(key: key),
     );
@@ -228,64 +214,60 @@ class ThemeWrapper extends StatelessWidget {
 }
 
 class CongressFahrplanApp extends StatelessWidget {
-  const CongressFahrplanApp({Key? key}) : super(key: key);
+  const CongressFahrplanApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
       create: (context) => FavoriteProvider(),
       child: Consumer<FavoriteProvider>(
-        builder: (context, favoriteProvider, child) => FutureBuilder<Fahrplan>(
-          future: favoriteProvider.futureFahrplan,
-          builder: (context, AsyncSnapshot<Fahrplan> snapshot) {
-            if (snapshot.hasData) {
-              favoriteProvider.initializeProvider(snapshot.data!);
-              if (favoriteProvider.fahrplan!.fetchState ==
-                  FahrplanFetchState.successful) {
-                return AllTalks(
-                  theme: Theme.of(context),
-                );
-              } else {
-                return SafeArea(
-                  child: Scaffold(
-                    backgroundColor: FahrplanColors.baseBlack(),
-                    body: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Image.asset('assets/icon.png'),
-                        const Text(
-                          'Could not fetch Fahrplan!',
+        builder:
+            (context, favoriteProvider, child) => FutureBuilder<Fahrplan>(
+              future: favoriteProvider.futureFahrplan,
+              builder: (context, AsyncSnapshot<Fahrplan> snapshot) {
+                if (snapshot.hasData) {
+                  favoriteProvider.initializeProvider(snapshot.data!);
+                  if (favoriteProvider.fahrplan!.fetchState ==
+                      FahrplanFetchState.successful) {
+                    return AllTalks(theme: Theme.of(context));
+                  } else {
+                    return SafeArea(
+                      child: Scaffold(
+                        backgroundColor: FahrplanColors.baseBlack(),
+                        body: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Image.asset('assets/icon.png'),
+                            const Text('Could not fetch Fahrplan!'),
+                            Text(favoriteProvider.fahrplan!.fetchMessage!),
+                          ],
                         ),
-                        Text(
-                          favoriteProvider.fahrplan!.fetchMessage!,
-                        ),
-                      ],
-                    ),
-                  ),
-                );
-              }
-            } else {
-              return SafeArea(
-                child: Scaffold(
-                  backgroundColor: FahrplanColors.baseBlack(),
-                  body: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Container(
-                          padding: const EdgeInsets.fromLTRB(40, 40, 40, 40),
-                          child: Image.asset('assets/icon.png')),
-                      const CircularProgressIndicator(),
-                      Container(
-                        padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
-                        child: const Text('Fetching Fahrplan'),
                       ),
-                    ],
-                  ),
-                ),
-              );
-            }
-          },
-        ),
+                    );
+                  }
+                } else {
+                  return SafeArea(
+                    child: Scaffold(
+                      backgroundColor: FahrplanColors.baseBlack(),
+                      body: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Container(
+                            padding: const EdgeInsets.fromLTRB(40, 40, 40, 40),
+                            child: Image.asset('assets/icon.png'),
+                          ),
+                          const CircularProgressIndicator(),
+                          Container(
+                            padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
+                            child: const Text('Fetching Fahrplan'),
+                          ),
+                        ],
+                      ),
+                    ),
+                  );
+                }
+              },
+            ),
       ),
     );
   }

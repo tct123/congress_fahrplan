@@ -21,7 +21,7 @@ import 'package:url_launcher/url_launcher.dart';
 
 class FahrplanDrawer extends StatelessWidget {
   final String? title;
-  const FahrplanDrawer({Key? key, this.title}) : super(key: key);
+  const FahrplanDrawer({super.key, this.title});
 
   @override
   build(BuildContext context) {
@@ -31,10 +31,7 @@ class FahrplanDrawer extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.black54,
       appBar: AppBar(
-        title: Text(
-          '$title',
-          style: Theme.of(context).textTheme.titleLarge,
-        ),
+        title: Text('$title', style: Theme.of(context).textTheme.titleLarge),
         leading: Semantics(
           label: 'Close menu',
           child: IconButton(
@@ -47,46 +44,43 @@ class FahrplanDrawer extends StatelessWidget {
         children: <Widget>[
           title! == 'Favorites'
               ? FlatIconTextButton(
-                  icon: Icons.calendar_today,
-                  text: 'Show Overview',
-                  onPressed: () {
-                    Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) {
-                          return AllTalks(
-                            theme: Theme.of(context),
-                          );
-                        },
-                      ),
-                    );
-                  },
-                )
+                icon: Icons.calendar_today,
+                text: 'Show Overview',
+                onPressed: () {
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) {
+                        return AllTalks(theme: Theme.of(context));
+                      },
+                    ),
+                  );
+                },
+              )
               : FlatIconTextButton(
-                  icon: Icons.favorite,
-                  text: 'Show Favorites',
-                  onPressed: () {
-                    if (kDebugMode) {
-                      print('Show favorites pressed.');
-                    }
-                    Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const Favorites(),
-                      ),
-                    );
-                  },
-                ),
+                icon: Icons.favorite,
+                text: 'Show Favorites',
+                onPressed: () {
+                  if (kDebugMode) {
+                    print('Show favorites pressed.');
+                  }
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(builder: (context) => const Favorites()),
+                  );
+                },
+              ),
           FahrplanFetcher.multipleSchedules
               ? FlatCheckBoxTextButton(
-                  value: favorites.fahrplan!.settings!.getLoadFullFahrplan(),
-                  text: 'Load complete Fahrplan',
-                  onPressed: () {
-                    favorites.fahrplan!.settings!.setLoadFullFahrplan(
-                        !favorites.fahrplan!.settings!.getLoadFullFahrplan(),
-                        context);
-                  },
-                )
+                value: favorites.fahrplan!.settings!.getLoadFullFahrplan(),
+                text: 'Load complete Fahrplan',
+                onPressed: () {
+                  favorites.fahrplan!.settings!.setLoadFullFahrplan(
+                    !favorites.fahrplan!.settings!.getLoadFullFahrplan(),
+                    context,
+                  );
+                },
+              )
               : Container(),
           FlatIconTextButton(
             icon: Icons.sync,
@@ -96,21 +90,27 @@ class FahrplanDrawer extends StatelessWidget {
           FlatIconTextButton(
             icon: Icons.share,
             text: 'Share this app',
-            onPressed: () => SharePlus.share(
-                'Check out the $acronym Fahrplan app: https://play.google.com/store/apps/details?id=de.delusionsoftware.congress_fahrplan'
-                    as ShareParams),
+            onPressed:
+                () => SharePlus.share(
+                  'Check out the $acronym Fahrplan app: https://play.google.com/store/apps/details?id=de.delusionsoftware.congress_fahrplan'
+                      as ShareParams,
+                ),
           ),
           FlatIconTextButton(
             icon: Icons.security,
             text: 'Show Data Privacy Policy',
-            onPressed: () => launchUrlInternal(
-                'https://github.com/benjaminSchilling33/congress_fahrplan/wiki/Congress-Fahrplan-Datenschutzerkl%C3%A4rung-(Privacy-Policy)'),
+            onPressed:
+                () => launchUrlInternal(
+                  'https://github.com/benjaminSchilling33/congress_fahrplan/wiki/Congress-Fahrplan-Datenschutzerkl%C3%A4rung-(Privacy-Policy)',
+                ),
           ),
           FlatIconTextButton(
             icon: Icons.bug_report,
             text: 'Report Bug',
-            onPressed: () => launchUrlInternal(
-                'https://github.com/benjaminSchilling33/congress_fahrplan/issues'),
+            onPressed:
+                () => launchUrlInternal(
+                  'https://github.com/benjaminSchilling33/congress_fahrplan/issues',
+                ),
           ),
           FlatIconTextButton(
             icon: Icons.color_lens,
@@ -119,9 +119,7 @@ class FahrplanDrawer extends StatelessWidget {
           ),
           Container(
             padding: const EdgeInsets.fromLTRB(32, 0, 0, 0),
-            child: Text(
-              'Version: ${favorites.packageVersion}',
-            ),
+            child: Text('Version: ${favorites.packageVersion}'),
           ),
         ],
       ),
@@ -143,16 +141,17 @@ class FahrplanDrawer extends StatelessWidget {
     if (permissionsAvailable.data!) {
       showDialog(
         context: context,
-        builder: (BuildContext context) => SimpleDialog(
-          contentPadding: const EdgeInsets.all(10),
-          title: const Text('Sync favorites'),
-          children: <Widget>[
-            SyncCalendar(
-              calendarPlugin: deviceCalendar,
-              provider: favorites,
+        builder:
+            (BuildContext context) => SimpleDialog(
+              contentPadding: const EdgeInsets.all(10),
+              title: const Text('Sync favorites'),
+              children: <Widget>[
+                SyncCalendar(
+                  calendarPlugin: deviceCalendar,
+                  provider: favorites,
+                ),
+              ],
             ),
-          ],
-        ),
       );
     }
   }

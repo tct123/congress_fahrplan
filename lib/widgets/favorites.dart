@@ -11,7 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class Favorites extends StatelessWidget {
-  const Favorites({Key? key}) : super(key: key);
+  const Favorites({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -33,12 +33,8 @@ class Favorites extends StatelessWidget {
               ),
             ),
           ),
-          drawer: const FahrplanDrawer(
-            title: 'Favorites',
-          ),
-          body: TabBarView(
-            children: favorites.fahrplan!.buildFavoriteList(),
-          ),
+          drawer: const FahrplanDrawer(title: 'Favorites'),
+          body: TabBarView(children: favorites.fahrplan!.buildFavoriteList()),
         ),
       ),
     );
