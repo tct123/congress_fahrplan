@@ -96,8 +96,9 @@ class FahrplanDrawer extends StatelessWidget {
           FlatIconTextButton(
             icon: Icons.share,
             text: 'Share this app',
-            onPressed: () => Share.share(
-                'Check out the $acronym Fahrplan app: https://play.google.com/store/apps/details?id=de.delusionsoftware.congress_fahrplan'),
+            onPressed: () => SharePlus.share(
+                'Check out the $acronym Fahrplan app: https://play.google.com/store/apps/details?id=de.delusionsoftware.congress_fahrplan'
+                    as ShareParams),
           ),
           FlatIconTextButton(
             icon: Icons.security,

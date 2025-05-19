@@ -87,7 +87,7 @@ class FavoriteProvider extends ChangeNotifier {
     fahrplan!.days!
         .firstWhere((day) => day.date == talkDate)
         .rooms!
-        .firstWhere((room) => room.name == talk.room, orElse: null)
+        .firstWhere((room) => room.name == talk.room, orElse: () => null)
         .talks!
         .firstWhere((ta) => (ta.id == talk.id && !ta.favorite!))
         .favorite = true;
