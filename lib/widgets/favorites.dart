@@ -29,7 +29,9 @@ class Favorites extends StatelessWidget {
             bottom: TabBar(
               tabs: favorites.fahrplan!.conference!.getDaysAsText(),
               indicator: UnderlineTabIndicator(
-                borderSide: BorderSide(color: Theme.of(context).indicatorColor),
+                borderSide: BorderSide(
+                  color: Theme.of(context).TabBarThemeData.indicatorColor,
+                ),
               ),
             ),
           ),

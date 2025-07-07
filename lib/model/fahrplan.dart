@@ -16,12 +16,7 @@ import 'conference.dart';
 import 'day.dart';
 import 'room.dart';
 
-enum FahrplanFetchState {
-  successful,
-  timeout,
-  noDataConnection,
-  noFile,
-}
+enum FahrplanFetchState { successful, timeout, noDataConnection, noFile }
 
 class Fahrplan {
   final String? version;
@@ -56,8 +51,12 @@ class Fahrplan {
     this.fetchMessage,
   });
 
-  factory Fahrplan.fromJson(var json, FavoritedTalks favTalks,
-      Settings settings, FahrplanFetchState fetchState) {
+  factory Fahrplan.fromJson(
+    var json,
+    FavoritedTalks favTalks,
+    Settings settings,
+    FahrplanFetchState fetchState,
+  ) {
     return Fahrplan(
       version: json['version'],
       baseUrl: json['base_url'],
@@ -72,9 +71,7 @@ class Fahrplan {
   }
 
   Widget buildDayLayout(BuildContext context) {
-    dayTabCache = TabBarView(
-      children: conference!.buildDayTabs(),
-    );
+    dayTabCache = TabBarView(children: conference!.buildDayTabs());
     return DefaultTabController(
       length: conference!.daysCount!,
       child: Scaffold(
@@ -89,14 +86,14 @@ class Fahrplan {
               tabs: conference!.getDaysAsText(),
               indicator: UnderlineTabIndicator(
                 borderSide: BorderSide(
-                    color: Theme.of(context).indicatorColor, width: 5.0),
+                  color: Theme.of(context).TabBarThemeData.indicatorColor,
+                  width: 5.0,
+                ),
               ),
             ),
           ),
         ),
-        drawer: const FahrplanDrawer(
-          title: 'Overview',
-        ),
+        drawer: const FahrplanDrawer(title: 'Overview'),
         body: dayTabCache,
       ),
     );
@@ -112,14 +109,16 @@ class Fahrplan {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
           LayoutBuilder(
-            builder: (BuildContext context, BoxConstraints constrains) =>
-                LinearProgressPageIndicator(
-              itemCount: rooms!.length,
-              currentPageNotifier: currentPageNotifier,
-              progressColor: Theme.of(context).indicatorColor,
-              width: constrains.maxWidth,
-              height: 10,
-            ),
+            builder:
+                (BuildContext context, BoxConstraints constrains) =>
+                    LinearProgressPageIndicator(
+                      itemCount: rooms!.length,
+                      currentPageNotifier: currentPageNotifier,
+                      progressColor:
+                          Theme.of(context).TabBarThemeData.indicatorColor,
+                      width: constrains.maxWidth,
+                      height: 10,
+                    ),
           ),
           Expanded(
             child: PageStorage(
@@ -129,17 +128,18 @@ class Fahrplan {
                 itemCount: days!.length + 1,
                 controller: PageController(viewportFraction: 0.90),
                 itemBuilder: (BuildContext context, int index) {
-                  return _buildCarousel(context,
-                      days![index >= days!.length ? index - 1 : index], index);
+                  return _buildCarousel(
+                    context,
+                    days![index >= days!.length ? index - 1 : index],
+                    index,
+                  );
                 },
               ),
             ),
           ),
         ],
       ),
-      drawer: const FahrplanDrawer(
-        title: 'Overview',
-      ),
+      drawer: const FahrplanDrawer(title: 'Overview'),
     );
   }
 
@@ -159,7 +159,11 @@ class Fahrplan {
               controller: PageController(viewportFraction: 0.85),
               itemBuilder: (BuildContext context, int itemIndex) {
                 return buildRoom(
-                    context, itemIndex, d, d.rooms![itemIndex].name!);
+                  context,
+                  itemIndex,
+                  d,
+                  d.rooms![itemIndex].name!,
+                );
               },
               onPageChanged: (int itemIndex) {
                 currentPageNotifier.value = itemIndex;
@@ -172,7 +176,11 @@ class Fahrplan {
   }
 
   Widget buildRoom(
-      BuildContext context, int itemIndex, Day d, String roomName) {
+    BuildContext context,
+    int itemIndex,
+    Day d,
+    String roomName,
+  ) {
     int month = d.date!.month;
     int day = d.date!.day;
     return Padding(
@@ -203,12 +211,16 @@ class Fahrplan {
     List<Column> dayColumns = [];
     for (Day d in days!) {
       List<Widget> widgets = [];
-      widgets.addAll(favoriteTalks!
-          .where((talk) => talk.date!.day == d.date!.day)
-          .where((talk) => conference!.days!
-              .firstWhere((date) => date.date!.day == talk.day!.day)
-              .talks!
-              .contains(talk)));
+      widgets.addAll(
+        favoriteTalks!
+            .where((talk) => talk.date!.day == d.date!.day)
+            .where(
+              (talk) => conference!.days!
+                  .firstWhere((date) => date.date!.day == talk.day!.day)
+                  .talks!
+                  .contains(talk),
+            ),
+      );
       dayColumns.add(
         Column(
           children: <Widget>[
