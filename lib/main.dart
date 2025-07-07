@@ -108,7 +108,6 @@ class ThemeWrapper extends StatelessWidget {
         primaryColor: FahrplanColors.baseWhite(),
         primaryColorLight: FahrplanColors.baseWhite(),
         primaryColorDark: FahrplanColors.baseBlack(),
-        indicatorColor: FahrplanColors.primaryAccentLightBlue(),
         textTheme: TextTheme(
           titleLarge: TextStyle(color: FahrplanColors.baseWhite()),
           bodyMedium: TextStyle(color: FahrplanColors.baseWhite()),
