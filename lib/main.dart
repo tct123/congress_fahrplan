@@ -104,7 +104,7 @@ class ThemeWrapper extends StatelessWidget {
           brightness: Brightness.dark,
           primary: FahrplanColors.baseWhite(),
         ),
-        tabBarTheme: const TabBarTheme(indicator: UnderlineTabIndicator()),
+        tabBarTheme: const TabBarThemeData(indicator: UnderlineTabIndicator()),
         primaryColor: FahrplanColors.baseWhite(),
         primaryColorLight: FahrplanColors.baseWhite(),
         primaryColorDark: FahrplanColors.baseBlack(),
@@ -119,7 +119,7 @@ class ThemeWrapper extends StatelessWidget {
           labelSmall: TextStyle(color: FahrplanColors.baseWhite()),
           headlineSmall: TextStyle(color: FahrplanColors.baseWhite()),
         ),
-        cardTheme: CardTheme(
+        cardTheme: CardThemeData(
           color: FahrplanColors.baseBlack(),
           shape: ContinuousRectangleBorder(
             borderRadius: BorderRadius.circular(0.0),
