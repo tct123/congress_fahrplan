@@ -16,7 +16,7 @@ import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 /// The Talk widget stores all data about it and build a card with all data relevant for it.
-class Talk extends StatelessWidget {
+abstract class Talk extends StatelessWidget {
   late final DateTime? day;
   final int? id;
   final String? title;
@@ -32,8 +32,7 @@ class Talk extends StatelessWidget {
   final List<Person>? persons;
   final bool? doNotRecord;
   final bool? doNotStream;
-  final bool? favorite;
-
+  Talk copyWith({bool? favorite});
   Talk(
       {this.id,
       this.title,
@@ -49,7 +48,6 @@ class Talk extends StatelessWidget {
       this.persons,
       this.doNotRecord,
       this.doNotStream,
-      this.favorite,
       this.day});
 
   factory Talk.fromJson(var json, String room) {
@@ -73,9 +71,10 @@ class Talk extends StatelessWidget {
           json['do_not_record'] != null ? json['do_not_record'] : false,
       doNotStream:
           json['do_not_stream'] != null ? json['do_not_stream'] : false,
-      favorite: false,
     );
   }
+
+  get favorite => null;
 
   static List<Person> jsonToPersonList(var json) {
     List<Person> persons = [];

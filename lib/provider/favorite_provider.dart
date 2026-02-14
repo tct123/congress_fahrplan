@@ -87,9 +87,9 @@ class FavoriteProvider extends ChangeNotifier {
             .firstWhere((room) => room.name == talk.room)
             .talks!
             .firstWhere((ta) => (ta.id == talk.id && ta.favorite!))
-            .favorite = false;
-        talk.favorite = false;
-        t.favorite = false;
+            .copyWith(favorite: false);
+        talk.copyWith(favorite: false);
+        t.copyWith(favorite: false);
         fahrplan!.favTalkIds!.removeFavoriteTalk(talk.id!);
         fahrplan!.favoriteTalks!.removeWhere((ta) => ta.id == talk.id);
         fahrplan!.favoriteTalks!.sort((a, b) => a.date!.compareTo(b.date!));
@@ -107,13 +107,13 @@ class FavoriteProvider extends ChangeNotifier {
         .firstWhere((room) => room.name == talk.room, orElse: null)
         .talks!
         .firstWhere((ta) => (ta.id == talk.id && !ta.favorite!))
-        .favorite = true;
+        .copyWith(favorite: true);
 
     /// Set favorite of this talk to true
-    talk.favorite = true;
+    talk.copyWith(favorite: true);
 
     /// Set favorite of talk in day to true
-    t.favorite = true;
+    t.copyWith(favorite: true);
     fahrplan!.favTalkIds!.addFavoriteTalk(talk.id!);
     fahrplan!.favoriteTalks!.add(talk);
     fahrplan!.favoriteTalks!.sort((a, b) => a.date!.compareTo(b.date!));
