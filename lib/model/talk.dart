@@ -17,7 +17,7 @@ import 'package:url_launcher/url_launcher.dart';
 
 /// The Talk widget stores all data about it and build a card with all data relevant for it.
 class Talk extends StatelessWidget {
-  DateTime? day;
+  late final DateTime? day;
   final int? id;
   final String? title;
   final String? track;
@@ -32,7 +32,7 @@ class Talk extends StatelessWidget {
   final List<Person>? persons;
   final bool? doNotRecord;
   final bool? doNotStream;
-  bool? favorite;
+  final bool? favorite;
 
   Talk(
       {this.id,
@@ -49,7 +49,8 @@ class Talk extends StatelessWidget {
       this.persons,
       this.doNotRecord,
       this.doNotStream,
-      this.favorite});
+      this.favorite,
+      this.day});
 
   factory Talk.fromJson(var json, String room) {
     return Talk(
