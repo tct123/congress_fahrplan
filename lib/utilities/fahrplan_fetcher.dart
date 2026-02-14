@@ -75,7 +75,8 @@ class FahrplanFetcher {
 
     /// Fetch the Fahrplan from the REST API
     /// Check for network connectivity
-    final List<ConnectivityResult> connectivityResult = await (Connectivity().checkConnectivity());
+    final List<ConnectivityResult> connectivityResult =
+        await (Connectivity().checkConnectivity());
     if (connectivityResult.contains(ConnectivityResult.mobile) ||
         connectivityResult.contains(ConnectivityResult.wifi)) {
       /// Fetch the fahrplan depending on what is set in the settings,
